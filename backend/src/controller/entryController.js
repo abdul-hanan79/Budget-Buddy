@@ -2,53 +2,24 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 require('dotenv').config();
 
-
-const doCreateBook = async (req, res) => {
+const doCreateEntry = async (req, res) => {
     try {
-        const { name, userId } = req.body
-        const createdBook = await prisma.ExpenseBook.create({
-            data: {
-                name,
-                userId
-            }
-        })
-        console.log("creted book", createdBook);
-        const response = {
-            createdBook,
-            message: "successfull"
-        }
-        res.status(200).json(response)
-    }
-    catch (error) {
-        console.log("error in ", error.message)
-        const response = {
-            error,
-            message: "unsuccessfull"
-        }
-        res.status(500).json(response)
-    }
-    finally {
-        await prisma.$disconnect()
-    }
-}
-const doUpdateBook = async (req, res) => {
-    try {
-        const bookId = req.params.id
-        console.log("book id", bookId);
         console.log("req.body", req.body);
-        const { name } = req.body;
-        console.log("name in body", name);
-        const updatedBook = await prisma.ExpenseBook.update({
-            where: {
-                id: bookId
-            },
-            data: {
-                name
-            }
+        const { amount, description, category, type, expenseBookId } = req.body
+        const newEntry = {
+            amount,
+            description,
+            category,
+            type,
+            expenseBookId,
+        }
+        console.log("new Entry", newEntry);
+        const createdEntry = await prisma.ExpenseItems.create({
+            data: newEntry
         })
-        console.log("updated book is", updatedBook);
+        console.log("new Entry", createdEntry);
         const response = {
-            updatedBook,
+            result: createdEntry,
             message: "successfull"
         }
         res.status(200).json(response)
@@ -65,23 +36,17 @@ const doUpdateBook = async (req, res) => {
         await prisma.$disconnect()
     }
 }
-const doDeleteBook = async (req, res) => {
+const doGetEntries = async (req, res) => {
     try {
-        const bookId = req.params.id
-        console.log("bookdId", bookId);
-        const deleteExpenseItems = await prisma.ExpenseItems.deleteMany({
+        const { expenseBookId } = req.body.expenseBookId;
+        const allEntries = await prisma.ExpenseItems.findMany({
             where: {
-                expenseBookId: bookId
+                expenseBookId,
             }
         })
-        const deleteExpenseBook = await prisma.ExpenseBook.delete({
-            where: {
-                id: bookId
-            }
-        })
-        const transaction = await prisma.$transaction([deleteExpenseItems, deleteExpenseBook]);
-        console.log("transaction", transaction);
+        console.log("all entries of particualr book is", allEntries);
         const response = {
+            result: allEntries,
             message: "successfull"
         }
         res.status(200).json(response)
@@ -98,20 +63,27 @@ const doDeleteBook = async (req, res) => {
         await prisma.$disconnect()
     }
 }
-const doGetBooks = async (req, res) => {
+const doUpdateEntry = async (req, res) => {
     try {
-        const { userId } = req.body.user.id
-        const allExpenseBooks = await prisma.ExpenseBook.findMany({
+        const entryId = req.params.id
+        const { amount, description, category, type, expenseBookId } = req.body
+        const updateEntryData = {
+            amount,
+            description,
+            category,
+            type,
+            expenseBookId,
+        }
+        console.log("updateEntryData", updateEntryData);
+        const updatedEntry = await prisma.ExpenseItems.update({
             where: {
-                userId
+                id: entryId
             },
-            include: {
-                expenseItems: true
-            }
+            data: updateEntryData
         })
-        console.log("all books", allExpenseBooks);
+        console.log("update entry is", updatedEntry);
         const response = {
-            result: allExpenseBooks,
+            result: updatedEntry,
             message: "successfull"
         }
         res.status(200).json(response)
@@ -128,4 +100,30 @@ const doGetBooks = async (req, res) => {
         await prisma.$disconnect()
     }
 }
-module.exports = { doCreateBook, doUpdateBook, doDeleteBook, doGetBooks }
+const doDeleteEntry = async (req, res) => {
+    try {
+        const entryId = req.params.id
+        console.log("entryId", entryId);
+        await prisma.ExpenseItems.delete({
+            where: {
+                id: entryId
+            }
+        })
+        const response = {
+            message: "successfull"
+        }
+        res.status(200).json(response)
+    }
+    catch (error) {
+        console.log("error in ", error.message)
+        const response = {
+            error,
+            message: "unsuccessfull"
+        }
+        res.status(500).json(response)
+    }
+    finally {
+        await prisma.$disconnect()
+    }
+}
+module.exports = { doCreateEntry, doUpdateEntry, doDeleteEntry, doGetEntries }
