@@ -29,16 +29,26 @@ model ExpenseBook {
   updatedAt    DateTime       @updatedAt
   User         User?          @relation(fields: [userId], references: [id])
   userId       String?        @db.ObjectId
+  categories   Category[]
 }
 
 model ExpenseItems {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
   amount        Float
   description   String
-  category      String //like home , etc
+  category      Category     @relation(fields: [categoryId], references: [id])
+  categoryId    String       @db.ObjectId
   type          String //cash in or cash out
   ExpenseBook   ExpenseBook? @relation(fields: [expenseBookId], references: [id])
   expenseBookId String?      @db.ObjectId
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
+}
+
+model Category {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  ExpenseBook   ExpenseBook?   @relation(fields: [expenseBookId], references: [id])
+  expenseBookId String?        @db.ObjectId
+  ExpenseItems  ExpenseItems[]
 }

@@ -5,11 +5,11 @@ require('dotenv').config();
 const doCreateEntry = async (req, res) => {
     try {
         console.log("req.body", req.body);
-        const { amount, description, category, type, expenseBookId } = req.body
+        const { amount, description, categoryId, type, expenseBookId } = req.body
         const newEntry = {
             amount,
             description,
-            category,
+            categoryId,
             type,
             expenseBookId,
         }
@@ -42,6 +42,13 @@ const doGetEntries = async (req, res) => {
         const allEntries = await prisma.ExpenseItems.findMany({
             where: {
                 expenseBookId,
+            },
+            include: {
+                category: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         })
         console.log("all entries of particualr book is", allEntries);
@@ -66,11 +73,11 @@ const doGetEntries = async (req, res) => {
 const doUpdateEntry = async (req, res) => {
     try {
         const entryId = req.params.id
-        const { amount, description, category, type, expenseBookId } = req.body
+        const { amount, description, categoryId, type, expenseBookId } = req.body
         const updateEntryData = {
             amount,
             description,
-            category,
+            categoryId,
             type,
             expenseBookId,
         }
