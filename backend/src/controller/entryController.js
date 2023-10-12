@@ -48,7 +48,12 @@ const doGetEntries = async (req, res) => {
                     select: {
                         name: true
                     }
-                }
+                },
+                ExpenseBook:
+                {                    select: {
+                        name: true
+                    }
+                },
             }
         })
         console.log("all entries of particualr book is", allEntries);
