@@ -36,8 +36,8 @@ model ExpenseItems {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
   amount        Float
   description   String
-  category      Category     @relation(fields: [categoryId], references: [id])
-  categoryId    String       @db.ObjectId 
+  category      Category?    @relation(fields: [categoryId], references: [id])
+  categoryId    String?      @db.ObjectId
   type          String //cash in or cash out
   paymentMethod String       @default("cash")
   ExpenseBook   ExpenseBook? @relation(fields: [expenseBookId], references: [id])
