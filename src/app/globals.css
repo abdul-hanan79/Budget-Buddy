@@ -4,11 +4,7 @@
 
 
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-} */
+
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -38,6 +34,6 @@
   @apply flex justify-center items-center
 }
 
-.navbar-mobile-view {
-  @apply   only:bg-blue-800 
-}
+/* .navbar-mobile-view {
+  @apply only:bg-blue-800
+} */

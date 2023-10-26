@@ -2,51 +2,51 @@
 import IMAGES from "@/assets/images";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
 import Button from "./Button";
 // import { FontAwesomeIcon } from "@fontawesome";
 import { faArrowRight, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainIcon from "./Utils/Icon";
+import useNavbar from "@/CustomeHooks/useNavbar";
 const Navbar = () => {
-  const routes = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about-us" },
-  ];
+  const { routes, mobileView, toggleMobileView } = useNavbar();
   return (
     <nav
-      className={`flex items-center relative justify-between bg-white px-5 py-6 w-full`}
+      className={`flex items-center  justify-between bg-white px-5 py-6 w-full shadow-xl `}
     >
       <div>
-        <Image src={IMAGES.logo} alt="logo" width={90} className="" />
+        <Image src={IMAGES.logo} alt="logo" width={200} className="" />
       </div>
-      <div className="sm:flex sm:gap-5 max-[640px]:absolute max-[640px]:top-[80%] max-[640px]:flex max-[640px]:flex-col max-[640px]:w-full max-[640px]:bg-white max-[640px]:shadow-xl max-[640px]:p-3">
-        <ul
-          id="drawer"
-          role="menu"
-          className="sm:gap-3 flex  transition-left ease-[cubic-bezier(0.4, 0.0, 0.2, 1)] delay-150   w-auto min-h-0 dark:bg-slate-900"
-        >
-          {routes.map((route, index) => {
-            return (
-              <li
-                key={index}
-                className="navbar-text p-3  sm:p-0 md:p-3 text-primary hover:border-b-2 hover:border-secondary flex-center"
-              >
-                <Link href={`${route.path}`} className="dark:text-white">
-                  {route.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        <div className="sm:flex gap-3 items-center ">
-          <Button
-            title="Login/Register"
-            // className="sm:navbar-mobile-view"
-            rightIcon={<MainIcon icon={faArrowRight} />}
-          />
 
-          {/* <div className="h-10 w-10 hover:ring-4 user cursor-pointer relative ring-blue-700/30 rounded-full bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')]">
+      <div className={` ${!mobileView ? "hidden" : "flex"} sm:flex`}>
+        <div className="sm:flex  sm:gap-5 max-[640px]:absolute max-[640px]:top-[80%] max-[640px]:left-[0] max-[640px]:flex max-[640px]:flex-col max-[640px]:w-full max-[640px]:bg-white max-[640px]:shadow-xl max-[640px]:p-3">
+          <ul
+            id="drawer"
+            role="menu"
+            className="sm:gap-3 flex  transition-left ease-[cubic-bezier(0.4, 0.0, 0.2, 1)] delay-150   w-auto min-h-0 dark:bg-slate-900 max-[640px]:flex-col max-[640px]:items-start max-[640px]:mb-4"
+          >
+            {routes.map((route, index) => {
+              return (
+                <li
+                  key={index}
+                  className="navbar-text p-3  sm:p-0 md:p-3 text-primary hover:border-b-2 hover:border-secondary flex-center"
+                >
+                  <Link href={`${route.path}`} className="dark:text-white">
+                    {route.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="sm:flex gap-3 items-center ">
+            <Button
+              title="Login/Register"
+              // className="sm:navbar-mobile-view"
+              rightIcon={<MainIcon icon={faArrowRight} />}
+            />
+
+            {/* <div className="h-10 w-10 hover:ring-4 user cursor-pointer relative ring-blue-700/30 rounded-full bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')]">
           <div className="drop-down  w-48 overflow-hidden bg-white rounded-md shadow absolute top-12 right-3">
             <ul>
               <li className="px-3 py-3 text-sm font-medium flex items-center space-x-2 hover:bg-slate-400">
@@ -115,9 +115,15 @@ const Navbar = () => {
             </ul>
           </div>
         </div> */}
+          </div>
         </div>
       </div>
-      <div className="sm:hidden cursor-pointer" id="mobile-toggle">
+
+      <div
+        className="sm:hidden cursor-pointer"
+        id="mobile-toggle"
+        onClick={toggleMobileView}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"

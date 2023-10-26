@@ -1,0 +1,10 @@
+:root {
+    --xl-fs: 40px;
+    --lg-fs: 36px;
+    --md-fs: 28px;
+    --sm-fs: 24px;
+}
+
+.heading {
+    @apply font-bold text-lg md:text-2xl lg:text-4xl block
+}

@@ -13,6 +13,7 @@ const config: Config = {
       colors: {
         primary: "#202D10",
         secondary: "#60941A",
+        lightBg:'#bfd4a3',
         lightColor:'#cecf'
       },
       fontFamily: {
