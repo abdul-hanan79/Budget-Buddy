@@ -16,6 +16,9 @@ const config: Config = {
         lightBg:'#bfd4a3',
         lightColor:'#cecf'
       },
+      borderRadius:{
+        'lg':'50px',
+      },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],
         serif: ["Merriweather", "serif"],

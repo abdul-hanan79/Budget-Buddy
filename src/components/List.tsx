@@ -1,10 +1,33 @@
+import Link from "next/link";
 import React from "react";
 
-const List = ({ listItems = null }: any) => {
+const List = ({
+  listItems = null,
+  leftIcon,
+  className = "",
+  linkList = false,
+}: any) => {
   return (
     <ul>
-      {listItems &&
-        listItems.map((item: string, index: number) => <li>{item}</li>)}
+      {linkList
+        ? listItems.map((item: any, index: number) => (
+            <div className={`flex gap-4 md:text-base text-sm ${className}`}>
+              {leftIcon && <span>{leftIcon}</span>}
+              <li key={index} className="md:text-base text-sm">
+                {item}
+              </li>
+            </div>
+          ))
+        : listItems.map((item: any, index: number) => (
+            <div className={`flex gap-4 md:text-base text-sm ${className}`}>
+              {leftIcon && <span>{leftIcon}</span>}
+              <li key={index} className="md:text-base text-sm">
+                {/* <Link href={item.path}> */}
+                  {item.name}
+                  {/* </Link> */}
+              </li>
+            </div>
+          ))}
     </ul>
   );
 };

@@ -7,7 +7,7 @@ import Button from "./Button";
 // import { FontAwesomeIcon } from "@fontawesome";
 import { faArrowRight, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MainIcon from "./Utils/Icon";
+import MainIcon from "./Utils/MainIcon";
 import useNavbar from "@/CustomeHooks/useNavbar";
 const Navbar = () => {
   const { routes, mobileView, toggleMobileView } = useNavbar();
