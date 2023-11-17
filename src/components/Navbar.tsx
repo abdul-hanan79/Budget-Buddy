@@ -7,13 +7,15 @@ import Button from "./Button";
 // import { FontAwesomeIcon } from "@fontawesome";
 import { faArrowRight, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MainIcon from "./Utils/MainIcon";
-import useNavbar from "@/CustomeHooks/useNavbar";
+import MainIcon from "./ui/MainIcon";
+import useNavbar from "@/customeHooks/useNavbar";
+import useLogin from "@/customeHooks/useLogin";
 const Navbar = () => {
   const { routes, mobileView, toggleMobileView } = useNavbar();
+  const { goToLogin } = useLogin();
   return (
     <nav
-      className={`flex items-center  justify-between bg-white px-5 py-6 w-full shadow-xl `}
+      className={`flex items-center  justify-between bg-white px-5 py-6 w-full shadow-xl`}
     >
       <div>
         <Image src={IMAGES.logo} alt="logo" width={200} className="" />
@@ -44,6 +46,7 @@ const Navbar = () => {
               title="Login/Register"
               // className="sm:navbar-mobile-view"
               rightIcon={<MainIcon icon={faArrowRight} />}
+              onClick={goToLogin}
             />
 
             {/* <div className="h-10 w-10 hover:ring-4 user cursor-pointer relative ring-blue-700/30 rounded-full bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')]">

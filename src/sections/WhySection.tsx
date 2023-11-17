@@ -1,13 +1,14 @@
 import IMAGES from "@/assets/images";
-import Header from "@/components/Utils/Header";
-import Heading from "@/components/Utils/Heading";
-import Para from "@/components/Utils/Para";
+import Header from "@/components/ui/Header";
+import Heading from "@/components/ui/Heading";
+import Para from "@/components/ui/Para";
 import Image from "next/image";
 import React from "react";
+import "../sections/sectionStyle.css";
 
 const WhySection = () => {
   return (
-    <div className="rounded-lg bg-primary p-14 md:pb-56">
+    <div className="rounded-lg bg-primary md:px-32 px-5 pt-14 pb-14 md:pb-56">
       <Header
         title="Why Budget Buddy App?"
         className="text-white text-center"

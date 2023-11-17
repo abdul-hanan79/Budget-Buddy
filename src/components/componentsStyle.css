@@ -8,3 +8,23 @@
 .heading {
     @apply font-bold text-3xl lg:text-5xl block
 }
+
+
+@keyframes loader-rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader {
+    border-right-color: transparent;
+    animation: loader-rotate 1s linear infinite;
+}
+
+.hover-underline{
+    @apply hover:underline hover:underline-offset-8
+}

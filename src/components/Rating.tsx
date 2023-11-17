@@ -1,5 +1,5 @@
 import React from "react";
-import MainIcon from "./Utils/MainIcon";
+import MainIcon from "./ui/MainIcon";
 
 const Rating = ({ icon = "", value = "", heading = "" }: any) => {
   return (

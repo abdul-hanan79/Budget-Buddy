@@ -6,28 +6,29 @@ const List = ({
   leftIcon,
   className = "",
   linkList = false,
+  mainDivClassName = "",
+  listClassName = "",
 }: any) => {
+  console.log("linkList", linkList);
   return (
-    <ul>
-      {linkList
-        ? listItems.map((item: any, index: number) => (
-            <div className={`flex gap-4 md:text-base text-sm ${className}`}>
-              {leftIcon && <span>{leftIcon}</span>}
-              <li key={index} className="md:text-base text-sm">
-                {item}
-              </li>
-            </div>
-          ))
-        : listItems.map((item: any, index: number) => (
-            <div className={`flex gap-4 md:text-base text-sm ${className}`}>
-              {leftIcon && <span>{leftIcon}</span>}
-              <li key={index} className="md:text-base text-sm">
-                {/* <Link href={item.path}> */}
-                  {item.name}
-                  {/* </Link> */}
-              </li>
-            </div>
-          ))}
+    <ul className={`${mainDivClassName}`}>
+      {listItems &&
+        listItems.map((item: any, index: number) => (
+          <div
+            className={`flex gap-4 md:text-base text-sm ${
+              linkList ? "hover:underline hover:underline-offset-8" : ""
+            } ${className}`}
+          >
+            {leftIcon && <span>{leftIcon}</span>}
+            <li key={index} className={`md:text-base text-sm ${listClassName}`}>
+              {linkList ? (
+                <Link href={item?.path}>{item?.name}</Link>
+              ) : (
+                <span>{item?.name}</span>
+              )}
+            </li>
+          </div>
+        ))}
     </ul>
   );
 };

@@ -6,6 +6,7 @@ const IMAGES: any = {
   webBadge: require("./Web_App_badge.svg"),
   heroSectionPic:require("./hero_Section.png"),
   incomeAndExpense: require("./incomeAndExpense.webp"),
+  WHATSAPP_LOGO: require("./logo.png")
 };
 
 export default IMAGES;

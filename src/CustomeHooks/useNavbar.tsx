@@ -4,6 +4,7 @@ const useNavbar = () => {
   const routes = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about-us" },
+    
   ];
   const [mobileView, setMobileView] = useState(false);
   const toggleMobileView = () => {
