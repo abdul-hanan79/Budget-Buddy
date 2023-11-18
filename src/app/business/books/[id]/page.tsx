@@ -19,7 +19,6 @@ const page = ({ params }: any) => {
   console.log("");
   return (
     <div className="flex flex-col gap-8 p-4 ">
-      <AddEntry />
       {/* <h1>helo {id}</h1> */}
       {/* <Button leftIcon={<MainIcon icon={faArrowLeft}/>}/> */}
       <Heading

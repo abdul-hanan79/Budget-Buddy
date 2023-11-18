@@ -13,12 +13,17 @@ const InputBlock = ({
   onChange = null,
   error = "",
   leftIcon = "",
+  smallInput = false,
 }: any) => {
   return (
-    <div className="input-block">
+    <div
+      className={`input-block ${
+        !smallInput ? "text-base md:text-lg" : "sm:text-base text-sm"
+      }`}
+    >
       <label
         htmlFor="description"
-        className="block text-base md:text-lg font-medium text-slate-700F"
+        className={`block font-medium text-slate-700F`}
       >
         {label}
       </label>

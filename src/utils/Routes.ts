@@ -6,6 +6,7 @@ const ROUTES = {
   VERIFY_OTP:'/verify-otp',
   BOOKS:'/business/books',
   SETTING:'/business/setting',
+  ADD_Entry:'/business/books/add-entry'
 };
 
 export default ROUTES;
