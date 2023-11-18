@@ -10,11 +10,12 @@ const Button = ({
   type = null,
   loading = false,
   isValid = true,
+  smallButton=false
 }: any) => {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-base md:text-lg bg-primary text-white rounded-lg font-semibold flex justify-center items-center  gap-2 navbar-text ${className}`}
+      className={`px-4 py-2 ${!smallButton? 'text-base md:text-lg': "sm:text-base text-sm"} bg-primary text-white rounded-lg font-semibold flex justify-center items-center  gap-2 navbar-text ${className} `}
       type={type}
       disabled={!isValid}
     >

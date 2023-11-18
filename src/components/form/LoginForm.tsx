@@ -1,16 +1,15 @@
 "use client";
 import React from "react";
+import { loginSchema } from "@/schemas/loginSchema";
 import { useFormik } from "formik";
-import InputBlock from "./InputBlock";
-import Button from "./Button";
+import InputBlock from "../input/InputBlock";
+import Button from "../Button";
 import Link from "next/link";
 import ROUTES from "@/utils/Routes";
-import { forgotPasswordSchema } from "@/schemas/forgotPasswordSchema";
 
-const ForgotPasswordForm = () => {
+const LoginForm = () => {
   const initialValues = {
     email: "",
-    code: "",
     password: "",
   };
   const {
@@ -23,7 +22,7 @@ const ForgotPasswordForm = () => {
     touched,
   } = useFormik({
     initialValues,
-    validationSchema: forgotPasswordSchema,
+    validationSchema: loginSchema,
     onSubmit: async (values, action) => {
       console.log("values", values);
       action.resetForm();
@@ -44,25 +43,6 @@ const ForgotPasswordForm = () => {
           error={errors.email}
           touched={touched.email}
         />
-        <Button
-          title="Sent Code"
-          loading={false}
-          isValid={isValid}
-          className="w-1/2"
-        />
-        <InputBlock
-          label="Enter OTP"
-          type="text"
-          name="code"
-          id="code"
-          placeholder="abc123"
-          value={values.code}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.code}
-          touched={touched.code}
-        />
-
         <InputBlock
           label="Enter your Password"
           type="password"
@@ -75,6 +55,18 @@ const ForgotPasswordForm = () => {
           error={errors.password}
           touched={touched.password}
         />
+        <div className="">
+          <p>
+            Don't have account?{" "}
+            <Link href={ROUTES.SIGNUP} className="text-secondary font-bold hover:underline hover:underline-offset-8">
+              {" "}
+              <span> Singup</span>
+            </Link>
+          </p>
+          <Link href={ROUTES.FORGOT_PASSWORD}>
+            <p className="text-secondary font-bold mt-2 hover:underline hover:underline-offset-8">Forgot Password</p>
+          </Link>
+        </div>
         <Button
           type="submit"
           title="Login"
@@ -87,4 +79,4 @@ const ForgotPasswordForm = () => {
   );
 };
 
-export default ForgotPasswordForm;
+export default LoginForm;

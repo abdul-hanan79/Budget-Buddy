@@ -2,8 +2,8 @@
 import React from "react";
 // import { loginSchema } from "@/schemas/loginSchema";
 import { useFormik } from "formik";
-import InputBlock from "./InputBlock";
-import Button from "./Button";
+import InputBlock from "../input/InputBlock";
+import Button from "../Button";
 import Link from "next/link";
 import ROUTES from "@/utils/Routes";
 import { signupSchema } from "@/schemas/signupSchema";
@@ -86,7 +86,7 @@ const SignupForm = () => {
           <p>
             Already have account?{" "}
             <Link
-              href={ROUTES.login}
+              href={ROUTES.LOGIN}
               className="text-secondary font-bold hover:underline hover:underline-offset-8"
             >
               {" "}

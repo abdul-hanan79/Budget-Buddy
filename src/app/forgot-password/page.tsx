@@ -1,5 +1,5 @@
 import IMAGES from "@/assets/images";
-import ForgotPasswordForm from "@/components/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/form/ForgotPasswordForm";
 import Heading from "@/components/ui/Heading";
 import Image from "next/image";
 import React from "react";

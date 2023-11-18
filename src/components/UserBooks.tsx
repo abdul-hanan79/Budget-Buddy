@@ -3,7 +3,7 @@ import React from "react";
 import BookHeader from "./BookHeader";
 import MainIcon from "./ui/MainIcon";
 import { faBook, faSearch } from "@fortawesome/free-solid-svg-icons";
-import InputBlock from "./InputBlock";
+import InputBlock from "./input/InputBlock";
 
 const UserBooks = () => {
   const booksNames = [
@@ -62,7 +62,7 @@ const UserBooks = () => {
         <InputBlock
           type="text"
           placeholder="filter books"
-          leftIcon={<MainIcon icon={faSearch} />}
+          leftIcon={faSearch}
         />
       </div>
       {booksNames.map((item, index) => {

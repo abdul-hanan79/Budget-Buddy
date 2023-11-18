@@ -1,5 +1,5 @@
 import IMAGES from "@/assets/images";
-import OTPForm from "@/components/OTPForm";
+import OTPForm from "@/components/form/OTPForm";
 import Heading from "@/components/ui/Heading";
 import Image from "next/image";
 import React from "react";

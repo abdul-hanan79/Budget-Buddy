@@ -1,4 +1,5 @@
 import React from "react";
+import MainIcon from "../ui/MainIcon";
 
 const InputBlock = ({
   label = "",
@@ -21,7 +22,7 @@ const InputBlock = ({
       >
         {label}
       </label>
-      <div className="relative">
+      <div className="relative z-0">
         <input
           type={type}
           autoComplete="off"
@@ -34,7 +35,11 @@ const InputBlock = ({
           onChange={onChange}
           onBlur={handleBlur}
         />
-        {leftIcon && <span className="absolute top-3 right-3 text-gray-400">{leftIcon}</span>}
+        {leftIcon && (
+          <span className="absolute top-3 right-3 text-gray-400">
+            <MainIcon icon={leftIcon} />
+          </span>
+        )}
       </div>
       {error ? <p className="form-error text-rose-700">{error}</p> : null}
     </div>

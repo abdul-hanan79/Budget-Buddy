@@ -14,7 +14,7 @@ const BusinessSidebar = () => {
   return (
     <div className="bg-lightBg  md:flex md:flex-col md:gap-5 hidden  ">
       <div className="flex justify-center gap-4 items-center bg-primary p-2 rounded-md text-white">
-        <Button rightIcon={<MainIcon icon={faPlus}/>} className="bg-white text-black" />
+        <Button rightIcon={<MainIcon icon={faPlus} className="text-black"/>} className="bg-white" />
         <Heading title="Add New Book" className="sm:text-xl" />
       </div>
       <div className="p-7 flex flex-col gap-5">

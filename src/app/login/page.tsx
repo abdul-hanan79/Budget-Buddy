@@ -1,5 +1,5 @@
 import IMAGES from "@/assets/images";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/form/LoginForm";
 import Heading from "@/components/ui/Heading";
 import Image from "next/image";
 import React from "react";
