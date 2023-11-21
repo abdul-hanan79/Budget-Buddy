@@ -25,6 +25,10 @@
     animation: loader-rotate 1s linear infinite;
 }
 
-.hover-underline{
+.hover-underline {
     @apply hover:underline hover:underline-offset-8
+}
+
+.border {
+    @apply border-2 border-gray-100
 }

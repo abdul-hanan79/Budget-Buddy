@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import MainIcon from "../ui/MainIcon";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
-const DropDown = ({ title = "drop down", options = [{ name: "hello" }] }) => {
+const DropDown = ({
+  title = "drop down",
+  rightIcon,
+  options = [{ name: "hello" }],
+}: any) => {
   return (
     <div className="mb-4">
-      <label
-        htmlFor="Category"
-        className="block font-medium text-slate-700F sm:text-base text-sm"
-      >
-        {title}
-      </label>
+      <div className={`${rightIcon?"flex justify-between ":""}`}>
+        <label
+          htmlFor="Category"
+          className="block font-medium text-slate-700F sm:text-base text-sm"
+        >
+          {title}
+        </label>
+        {rightIcon && <span>{rightIcon}</span>}
+      </div>
       <select
         id="category"
         name="category"
@@ -20,15 +27,13 @@ const DropDown = ({ title = "drop down", options = [{ name: "hello" }] }) => {
         // onBlur={handleBlur}
       >
         <option value="" label="Select an option" />
-        {options.map((option)=>(
-        <option value={option.name} label={option.name}/>
+        {options.map((option: any) => (
+          <option value={option.name} label={option.name} />
         ))}
         {/* <option value="clothes" label="Clothes" />
         <option value="shoes" label="Shoes" />
         <option value="accessories" label="Accessories" /> */}
       </select>
-
-      
     </div>
   );
   //   const [showMenu, setShowMenu] = useState(false);

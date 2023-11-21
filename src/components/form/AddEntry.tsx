@@ -4,18 +4,20 @@ import Heading from "../ui/Heading";
 import MainIcon from "../ui/MainIcon";
 import Button from "../Button";
 
-import { faCross, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCross, faGear, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { addEntrySchema } from "@/schemas/addEntry";
 import InputBlock from "../input/InputBlock";
 import DropDown from "../input/DropDown";
 import Label from "../input/Label";
+import Link from "next/link";
 
 const AddEntry = () => {
   const [showDiv, setShowDiv] = useState(true);
   const hideDiv = () => {
     setShowDiv(!showDiv);
   };
+  const [entryType, setEntryType] = useState("cashIn");
   const initialValues = {
     entryType: "",
     date: "",
@@ -48,29 +50,39 @@ const AddEntry = () => {
         showDiv ? "block" : "hidden"
       } p-4 rounded-md  transform translate-x-0 opacity-100  overflow-x-auto`}
     >
+      {/* Header */}
       <div className="flex justify-between items-center border-b-2 border-gray-50 p-3">
-        <Heading title="Add Cash Entry" subHeading />
+        <Heading
+          title={
+            entryType == "cashIn" ? "Add Cash In Entry" : "Add Cash Out Entry"
+          }
+          subHeading
+          className={`${
+            entryType == "cashIn" ? "text-cashIn" : "text-cashOut"
+          } font-bold`}
+        />
         <Button
           leftIcon={<MainIcon icon={faXmark} className="text-black" />}
           className="bg-white"
           onClick={hideDiv}
         />
       </div>
-      <div className="flex flex-col gap-3 py-2 ">
-        <form>
+
+      <div className="">
+        <form className="flex flex-col gap-5 py-2 ">
           <div className="flex gap-2">
             <div className="">
               <input
                 type="radio"
                 name="entryType"
-                id="1"
+                // id="entryType"
                 value="cash in"
                 className="peer hidden"
                 checked
               />
               <label
-                htmlFor="1"
-                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-cashIn peer-checked:font-bold peer-checked:text-white border-2 border-yellow-300"
+                // htmlFor="entryType"
+                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-cashIn peer-checked:font-bold peer-checked:text-white border-2"
               >
                 Cash In
               </label>
@@ -79,13 +91,13 @@ const AddEntry = () => {
               <input
                 type="radio"
                 name="entryType"
-                id="2"
+                // id="entryType"
                 value="cashOut"
                 className="peer hidden"
               />
               <label
-                htmlFor="2"
-                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-cashOut peer-checked:font-bold peer-checked:text-white"
+                // htmlFor="entryType"
+                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-cashOut peer-checked:font-bold peer-checked:text-white border-2 border-gray-200"
               >
                 Cash Out
               </label>
@@ -133,8 +145,7 @@ const AddEntry = () => {
             error={errors.amount}
             touched={touched.amount}
           />
-          
-          
+
           <InputBlock
             smallInput
             label="Description"
@@ -150,7 +161,14 @@ const AddEntry = () => {
           />
           <div className="flex justify-between">
             <div>
-              <DropDown title="Category" />
+              <DropDown
+                title="Category"
+                rightIcon={
+                  <Link href={"/"}>
+                    <MainIcon icon={faGear} className="text-secondary" />
+                  </Link>
+                }
+              />
             </div>
             <div>
               <DropDown title="Payment Method" />
