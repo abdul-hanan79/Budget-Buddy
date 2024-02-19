@@ -6,7 +6,7 @@ import Button from "../Button";
 
 import { faCross, faGear, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
-import { addEntrySchema } from "@/schemas/addEntry";
+import { addEntrySchema } from "@/schemas/addCategorySchema";
 import InputBlock from "../input/InputBlock";
 import DropDown from "../input/DropDown";
 import Label from "../input/Label";

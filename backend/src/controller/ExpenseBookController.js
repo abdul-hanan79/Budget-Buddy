@@ -14,7 +14,7 @@ const doCreateBook = async (req, res) => {
         })
         console.log("creted book", createdBook);
         const response = {
-            createdBook,
+            result: createdBook,
             message: "successfull"
         }
         res.status(200).json(response)
@@ -100,10 +100,9 @@ const doDeleteBook = async (req, res) => {
 }
 const doGetBooks = async (req, res) => {
     try {
-        console.log("req.body", req.body)
-        const userId = req.body.user.id
+        console.log("req.body", req)
+        const userId = req.userId
         console.log("user id", userId)
-
         const allExpenseBooks = await prisma.ExpenseBook.findMany({
             where: {
                 userId

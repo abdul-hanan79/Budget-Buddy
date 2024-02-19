@@ -15,7 +15,12 @@ const BookHeader = ({
   time = "",
   balance = "",
   lightTheme = false,
+  onDeleteClick = () => {
+    console.log("hello");
+  },
+  onEditClick = () => {},
 }: any) => {
+  console.log("on delte ",onDeleteClick);
   const [showIcons, setShowIcons] = useState(false);
   const onHover = () => {
     setShowIcons(true);
@@ -55,10 +60,14 @@ const BookHeader = ({
           <MainIcon
             icon={faEdit}
             className={`${!showIcons ? "hidden" : "inline-block"} `}
+            onClick={onDeleteClick}
           />
           <MainIcon
             icon={faTrash}
-            className={`${!showIcons ? "hidden" : "inline-block"} text-red-700 `}
+            className={`${
+              !showIcons ? "hidden" : "inline-block"
+            } text-red-700 `}
+            // onClick={}
           />
           {/* <MainIcon
             icon={faEdit}

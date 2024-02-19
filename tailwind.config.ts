@@ -17,6 +17,7 @@ const config: Config = {
         lightColor:'#cecf',
         cashIn:"#01865F",
         cashOut:"#C93B3B",
+      
       },
       borderRadius:{
         'lg':'50px',

@@ -2,5 +2,5 @@
 import * as Yup from "yup";
 
 export const verifyOTPSchema = Yup.object({
-  code: Yup.string().required("Please enter OTP"),
+  otp: Yup.string().required("Please enter OTP"),
 });

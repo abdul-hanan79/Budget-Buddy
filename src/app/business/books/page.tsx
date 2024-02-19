@@ -2,6 +2,7 @@ import BookLeftBar from "@/components/BookLeftBar";
 import Button from "@/components/Button";
 import UserBooks from "@/components/UserBooks";
 import AddEntry from "@/components/form/AddEntry";
+import AddBook from "@/components/form/addBook";
 import Heading from "@/components/ui/Heading";
 import MainIcon from "@/components/ui/MainIcon";
 import { faArrowLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +19,8 @@ const page = () => {
           subHeading={true}
         />
         <UserBooks />
+        {/* <Button leftIcon={<MainIcon icon={faPlus} />} title="Add new book" /> */}
+        {/* <AddBook/> */}
       </div>
       <div className="lg:inline-block hidden">
         <BookLeftBar />

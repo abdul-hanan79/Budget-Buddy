@@ -6,8 +6,16 @@ import InputBlock from "../input/InputBlock";
 import Button from "../Button";
 import Link from "next/link";
 import ROUTES from "@/utils/Routes";
+import ActionMessage from "../message/ActionMessage";
+import useOTP from "@/customeHooks/useOTP";
+import { useLogin } from "@/customeHooks/useLogin";
+// import { useLogin } from "@/customeHooks/useLogin";
+// import { useLogin } from "@/customeHooks/useLogin";
 
 const LoginForm = () => {
+  const { actionMessage } = useOTP();
+  const { doLogin, loader, setLoader } = useLogin();
+  console.log("action message", actionMessage);
   const initialValues = {
     email: "",
     password: "",
@@ -25,57 +33,73 @@ const LoginForm = () => {
     validationSchema: loginSchema,
     onSubmit: async (values, action) => {
       console.log("values", values);
+      doLogin(values);
       action.resetForm();
     },
   });
+  console.log("object");
   return (
-    <div className=" md:w-1/2 w-full md:p-10 p-5 border-2 border-lightBg rounded-2xl ">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <InputBlock
-          label="Email your email address"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="xyz123@gmail.com"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.email}
-          touched={touched.email}
+    <>
+      {/* {actionMessage.messageType && (
+        <ActionMessage
+          messageType={actionMessage.messageType}
+          message={actionMessage.message}
         />
-        <InputBlock
-          label="Enter your Password"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="**********"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.password}
-          touched={touched.password}
-        />
-        <div className="">
-          <p>
-            Don't have account?{" "}
-            <Link href={ROUTES.SIGNUP} className="text-secondary font-bold hover:underline hover:underline-offset-8">
-              {" "}
-              <span> Singup</span>
+      )} */}
+      <ActionMessage messageType="success" message="OTP Verified" />
+      <div className=" md:w-1/2 w-full md:p-10 p-5 border-2 border-lightBg rounded-2xl ">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <InputBlock
+            label="Email your email address"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="xyz123@gmail.com"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.email}
+            touched={touched.email}
+          />
+          <InputBlock
+            label="Enter your Password"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="**********"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.password}
+            touched={touched.password}
+          />
+          <div className="">
+            <p>
+              Don't have account?{" "}
+              <Link
+                href={ROUTES.SIGNUP}
+                className="text-secondary font-bold hover:underline hover:underline-offset-8"
+              >
+                {" "}
+                <span> Singup</span>
+              </Link>
+            </p>
+            <Link href={ROUTES.FORGOT_PASSWORD}>
+              <p className="text-secondary font-bold mt-2 hover:underline hover:underline-offset-8">
+                Forgot Password
+              </p>
             </Link>
-          </p>
-          <Link href={ROUTES.FORGOT_PASSWORD}>
-            <p className="text-secondary font-bold mt-2 hover:underline hover:underline-offset-8">Forgot Password</p>
-          </Link>
-        </div>
-        <Button
-          type="submit"
-          title="Login"
-          loading={false}
-          isValid={isValid}
-          className="w-full"
-        />
-      </form>
-    </div>
+          </div>
+          <Button
+            type="submit"
+            title="Login"
+            loading={loader}
+            isValid={isValid}
+            className="w-full"
+          />
+        </form>
+      </div>
+    </>
   );
 };
 

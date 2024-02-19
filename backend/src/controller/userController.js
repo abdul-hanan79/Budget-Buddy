@@ -206,6 +206,7 @@ const doConfirmOTP = async (req, res) => {
         //     otp: string,
         //     mobileNumber: string,
         // }
+        console.log("user details", req.body);
         const { otp, email } = req.body.user
         // if (!mobileNumber.includes("+")) {
         //     mobileNumber = `+${mobileNumber.trim()}`
@@ -217,7 +218,11 @@ const doConfirmOTP = async (req, res) => {
             }
         })
         if (!dbUser) {
-            return res.status(400).json({ msg: "Incorrect otp." })
+            const response = {
+                result: "otp is incorrect",
+                message: 'unsuccessfull',
+            }
+            return res.status(400).json(response)
         }
         await prisma.user.update({
             where: {

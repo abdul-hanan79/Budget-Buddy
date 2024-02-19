@@ -7,8 +7,11 @@ import Button from "../Button";
 import Link from "next/link";
 import ROUTES from "@/utils/Routes";
 import { signupSchema } from "@/schemas/signupSchema";
+import { useSignup } from "@/customeHooks/useSignup";
+import ActionMessage from "../message/ActionMessage";
 
 const SignupForm = () => {
+  const { doSignup, loader, signupMessage } = useSignup();
   const initialValues = {
     name: "",
     email: "",
@@ -28,81 +31,91 @@ const SignupForm = () => {
     validationSchema: signupSchema,
     onSubmit: async (values, action) => {
       console.log("values", values);
+      doSignup(values);
       action.resetForm();
     },
   });
+  console.log("is valid signup", isValid);
   return (
-    <div className=" md:w-1/2 w-full md:p-10 p-5 border-2 border-lightBg rounded-2xl ">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <InputBlock
-          label="Enter your name"
-          type="text"
-          name="name"
-          id="name"
-          placeholder="abdul hanan"
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.name}
-          touched={touched.name}
+    <>
+      {signupMessage && (
+        <ActionMessage
+          messageType={signupMessage?.messageType}
+          message={signupMessage?.message}
         />
-        <InputBlock
-          label="Email your email address"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="xyz123@gmail.com"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.email}
-          touched={touched.email}
-        />
-        <InputBlock
-          label="Enter your Password"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="**********"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.password}
-          touched={touched.password}
-        />
-        <InputBlock
-          label="Renter your Password"
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder="**********"
-          value={values.confirmPassword}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.confirmPassword}
-          touched={touched.confirmPassword}
-        />
-        <div className="">
-          <p>
-            Already have account?{" "}
-            <Link
-              href={ROUTES.LOGIN}
-              className="text-secondary font-bold hover:underline hover:underline-offset-8"
-            >
-              {" "}
-              <span> login</span>
-            </Link>
-          </p>
-        </div>
-        <Button
-          type="submit"
-          title="Signup"
-          loading={false}
-          isValid={isValid}
-          className="w-full"
-        />
-      </form>
-    </div>
+      )}
+      <div className=" md:w-1/2 w-full md:p-10 p-5 border-2 border-lightBg rounded-2xl ">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <InputBlock
+            label="Enter your name"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="abdul hanan"
+            value={values.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.name}
+            touched={touched.name}
+          />
+          <InputBlock
+            label="Email your email address"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="xyz123@gmail.com"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.email}
+            touched={touched.email}
+          />
+          <InputBlock
+            label="Enter your Password"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="**********"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.password}
+            touched={touched.password}
+          />
+          <InputBlock
+            label="Renter your Password"
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="**********"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.confirmPassword}
+            touched={touched.confirmPassword}
+          />
+          <div className="">
+            <p>
+              Already have account?{" "}
+              <Link
+                href={ROUTES.LOGIN}
+                className="text-secondary font-bold hover:underline hover:underline-offset-8"
+              >
+                {" "}
+                <span> login</span>
+              </Link>
+            </p>
+          </div>
+          <Button
+            type="submit"
+            title="Signup"
+            loading={loader}
+            isValid={isValid}
+            className="w-full"
+          />
+        </form>
+      </div>
+    </>
   );
 };
 

@@ -1,14 +1,20 @@
+"use client";
 import List from "@/components/List";
 import "../components/componentsStyle.css";
 import "../sections/sectionStyle.css";
-import React from "react";
+import React, { useEffect } from "react";
 import MainIcon from "@/components/ui/MainIcon";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import Para from "@/components/ui/Para";
 import Image from "next/image";
 import IMAGES from "@/assets/images";
+import { useLogin } from "@/customeHooks/useLogin";
 
 const HeroSection = () => {
+  const { doFetchCurrentUser } = useLogin();
+  useEffect(() => {
+    doFetchCurrentUser();
+  }, []);
   const data = [
     { name: "Track Income & Expenses" },
     { name: "Add Your Staff To Business" },

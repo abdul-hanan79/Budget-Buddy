@@ -30,5 +30,5 @@
 }
 
 .border {
-    @apply border-2 border-gray-100
+    @apply border-2 border-gray-200
 }

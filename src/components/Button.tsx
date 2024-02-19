@@ -1,5 +1,6 @@
 import React from "react";
 import "../app/globals.css";
+import "./componentsStyle.css";
 import Spinner from "./Spinner";
 const Button = ({
   title = "",
@@ -20,9 +21,11 @@ const Button = ({
         !smallButton ? "text-base md:text-lg" : "sm:text-base text-sm"
       } ${
         !bgLight
-          ? "bg-primary text-white hover:text-primary hover:bg-white hover:border-2 hover:border-gray-200"
-          : "text-primary bg-white border-2 border-gray-200 hover:bg-primary hover:text-white"
-      } rounded-lg font-semibold flex justify-center items-center shadow-md  gap-2 navbar-text transition ease-out delay-100  ${className}`}
+          ? "bg-primary text-white hover:text-primary hover:bg-white border"
+          : "text-primary bg-white  hover:bg-primary hover:text-white border"
+      } rounded-lg font-semibold flex justify-center items-center   gap-2 navbar-text transition ease-out delay-100  ${className} ${
+        isValid ? "bg-primary" : "bg-lightBg"
+      }`}
       type={type}
       disabled={!isValid}
     >
